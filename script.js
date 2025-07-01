@@ -11,7 +11,8 @@ const requestLocationBtn = document.getElementById('requestLocation');
 const continueWithoutBtn = document.getElementById('continueWithout');
 const closeLocationModal = document.getElementById('closeLocationModal');
 
-window.addEventListener('DOMContentLoaded', () => {
+// 确保DOM完全加载
+document.addEventListener('DOMContentLoaded', () => {
     welcomeModal.style.display = 'flex';
     getIPLocation();
 });
@@ -48,13 +49,24 @@ function getIPLocation() {
             
             ipLocationInfo.innerHTML = `
                 <p>您可能位于：</p>
-                <p><strong>${data.city}, ${data.region}, ${data.country_name}</strong></p>
+                <p><strong>${escapeHtml(data.city)}, ${escapeHtml(data.region)}, ${escapeHtml(data.country_name)}</strong></p>
             `;
         })
         .catch(error => {
             console.error('获取IP位置失败:', error);
-            ipLocationInfo.innerHTML = `<p>无法确定您的IP位置</p>`;
+            ipLocationInfo.innerHTML = '<p>无法确定您的IP位置</p>';
         });
+}
+
+// 防止XSS的简单HTML转义函数
+function escapeHtml(unsafe) {
+    if (!unsafe) return '';
+    return unsafe.toString()
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 function requestUserLocation() {
@@ -100,7 +112,7 @@ function showPreciseLocation(position) {
             
             locationDetails.innerHTML = `
                 <p>精确位置已获取:</p>
-                <p><strong>${city ? city + ', ' : ''}${region ? region + ', ' : ''}${country || ''}</strong></p>
+                <p><strong>${escapeHtml(city || '')}${city && region ? ', ' : ''}${escapeHtml(region || '')}${(city || region) && country ? ', ' : ''}${escapeHtml(country || '')}</strong></p>
                 <p>纬度: ${latitude.toFixed(6)}</p>
                 <p>经度: ${longitude.toFixed(6)}</p>
                 <p>精确度: ±${accuracy.toFixed(0)}米</p>
