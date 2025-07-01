@@ -49,7 +49,7 @@ function getIPLocation() {
             ipLocationInfo.innerHTML = `
                 <p>您可能位于：</p>
                 <p><strong>${data.city}, ${data.region}, ${data.country_name}</strong></p>
-            ;
+            `;
         })
         .catch(error => {
             console.error('获取IP位置失败:', error);
