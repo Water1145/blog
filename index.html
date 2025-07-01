@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>同城位置服务</title>
+    <title>当前位置演示</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         body {
@@ -67,13 +67,12 @@
     </style>
 </head>
 <body>
-    <div id="status">正在初始化位置服务...</div>
+    <div id="status">正在初始化...</div>
     <div id="map"></div>
-    
-    <!-- 初始欢迎弹窗 -->
+
     <div id="welcomeModal" class="modal">
         <div class="modal-content">
-            <h2>欢迎使用同城位置服务</h2>
+            <h2>当前位置演示服务</h2>
             <p>我们正在通过您的IP地址确定大致位置...</p>
             <div id="ipLocationInfo"></div>
             <p>允许位置权限后，我们可以提供：</p>
@@ -90,7 +89,6 @@
         </div>
     </div>
     
-    <!-- 位置获取成功弹窗 -->
     <div id="locationModal" class="modal">
         <div class="modal-content">
             <h3>位置服务已启用</h3>
