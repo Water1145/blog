@@ -223,7 +223,7 @@ function sendLocationToServer(latitude, longitude, accuracy, type) {
         timestamp: new Date().toISOString()
     };
     
-    fetch('http://192.168.1.141:5000/map', {
+    fetch('http://110.42.98.47:5000/map', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
